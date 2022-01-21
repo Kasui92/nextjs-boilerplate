@@ -6,21 +6,30 @@
   ],
   "private": true,
   "scripts": {
+    "dev:build": "dotenv -- cross-var docker build -t dev.%NEXT_PROJECT% -f .docker/dev/Dockerfile .",
+    "dev:clean": "dotenv -- cross-var docker image rm dev.%NEXT_PROJECT%",
+    "dev:run": "dotenv -- cross-var docker run -it --rm -v ${PWD}:/app -v /app/node_modules -p %NEXT_DEV_PORT%:3000 -e CHOKIDAR_USEPOLLING=true dev.%NEXT_PROJECT%",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start -p ${PORT:=3000}",
+    "lint": "next lint",
+    "prod:build": "dotenv -- cross-var docker build -t %NEXT_PROJECT% -f .docker/prod/Dockerfile .",
+    "prod:clean": "dotenv -- cross-var docker image rm %NEXT_PROJECT%",
+    "prod:run": "dotenv -- cross-var docker run -d --rm -p %NEXT_PROD_PORT%:3000 --name %NEXT_PROJECT% %NEXT_PROJECT%",
+    "prod:stop": "dotenv cross-var docker stop %NEXT_PROJECT%",
+    "install:clean": "rm -rf node_modules && rm yarn.lock && yarn "
   },
   "dependencies": {
-    "@chakra-ui/react": "^1.6.10",
+    "@chakra-ui/react": "^1.7.4",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
-    "@svgr/webpack": "^5.5.0",
-    "framer-motion": "^4",
-    "next": "11.1.3",
+    "cross-var": "^1.1.0",
+    "dotenv-cli": "^4.1.1",
+    "framer-motion": "^5",
+    "next": "^12.0.8",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "sass": "^1.32.11"
+    "sass": "^1.44.0"
   },
   "devDependencies": {
     "eslint": "7.32.0",
