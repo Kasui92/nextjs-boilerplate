@@ -1,4 +1,9 @@
 /**
+ * STATUS CODE
+ * @source https://github.com/ljosberinn/personal-react-boilerplate/blob/master/src/utils/statusCodes.ts
+ */
+
+/**
  * The HTTP `100 Continue` informational status response code indicates that
  * everything so far is OK and that the client should continue with the request
  * or ignore it if it is already finished.
