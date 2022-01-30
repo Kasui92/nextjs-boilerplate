@@ -1,10 +1,15 @@
-import type {AppProps} from "next/app";
+import {ReactElement} from "react";
+import {AppProps} from "../client/lib/types";
 
 import '../../styles/globals.css';
 
 export default function App({
-  Component,
-  pageProps
+    Component,
+    pageProps,
+    router
 } : AppProps): JSX.Element {
-  return <Component {...pageProps} />
+    // Definisco il Layout
+    const withLayout = Component.Layout || ((page: ReactElement) => page);
+
+    return withLayout(<Component {...pageProps} />);
 }
