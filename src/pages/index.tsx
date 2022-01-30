@@ -1,5 +1,6 @@
-import {Page} from "../client/lib/types";
 import {NextSeo} from "next-seo";
+
+import {Page} from "../client/lib/types";
 
 const IndexPage: Page = () => {
     return (
