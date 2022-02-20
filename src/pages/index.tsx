@@ -1,4 +1,5 @@
 import {NextSeo} from "next-seo";
+import {getLayout} from "../client/components/layouts/CommonLayout";
 
 import {Page} from "../client/lib/types";
 
@@ -14,5 +15,7 @@ const IndexPage: Page = () => {
         </>
     )
 }
+
+IndexPage.Layout = getLayout
 
 export default IndexPage
