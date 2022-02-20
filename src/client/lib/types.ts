@@ -1,5 +1,5 @@
 import {ReactElement, ReactNode} from "react";
-import {NextComponentType, NextPage as _NextPage} from "next";
+import {NextComponentType, NextPage} from "next";
 import {NextRouter} from "next/router";
 
 export type AppProps = {
@@ -9,7 +9,7 @@ export type AppProps = {
     router: NextRouter;
 };
 
-export type Page<P = {}> = _NextPage<P> & {
+export type Page<P = {}> = NextPage<P> & {
     Layout?: (page: ReactNode) => ReactNode;
 };
 
