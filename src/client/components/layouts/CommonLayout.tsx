@@ -1,19 +1,52 @@
 import {NextSeo} from "next-seo";
 
 import {ReactElement} from "react";
-import {WithChildren} from "../../lib/types";
+import {LayoutMetaProps, LayoutProps, WithChildren } from "../../lib/types";
 
-const CommonLayout = ({children}: WithChildren): JSX.Element =>
+import siteConfig from "../../../../config/site-config";
+
+/**
+ * Meta data for the layout
+ * @param title
+ * @param description
+ * @param image
+ * @param url
+ * @constructor
+ */
+const Meta = ({
+  title,
+  description,
+  image,
+  url
+}: LayoutMetaProps): JSX.Element =>
+    <NextSeo
+        title={title || siteConfig.meta.title}
+        description={description || siteConfig.meta.description}
+        additionalLinkTags={[
+            {
+                rel: "icon",
+                href: "/favicon.ico"
+            }
+        ]}
+    />
+
+/**
+ * Common layout for the application
+ * @param props
+ * @constructor
+ */
+const CommonLayout = ({
+  meta,
+  children
+}: WithChildren<LayoutProps>): JSX.Element =>
     <>
-        <NextSeo
-            titleTemplate={`%s | Next.js Boilerplate`}
-            description={`A basic structure to "play" with Next.js, powered by Typescript, styled with Tailwind Css and equipped with Docker`}
-        />
+        <Meta {...meta}/>
         {children}
     </>
 
+/**
+ * Export the layout
+ */
 export const getLayout =
-    (page: ReactElement): JSX.Element =>
+    (page?: ReactElement): JSX.Element =>
         <CommonLayout>{page}</CommonLayout>
-
-export default CommonLayout;

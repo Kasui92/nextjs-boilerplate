@@ -1,15 +1,20 @@
-import {ReactElement} from "react";
-import {AppProps} from "../client/lib/types";
+import {getLayout as getCommonLayout} from "../client/components/layouts/CommonLayout";
+import { ComponentWithLayout } from "../client/lib/types";
 
-import '../../styles/globals.css';
+import "../../styles/globals.css";
+
+export type AppRenderProps = {
+    pageProps: unknown;
+    err?: Error;
+    Component: ComponentWithLayout;
+};
 
 export default function App({
     Component,
-    pageProps,
-    router
-} : AppProps): JSX.Element {
+    pageProps
+} : AppRenderProps): JSX.Element {
     // Definisco il Layout
-    const withLayout = Component.Layout || ((page: ReactElement) => page);
+    const withLayout = Component.Layout || getCommonLayout
 
     return withLayout(<Component {...pageProps} />);
 }
