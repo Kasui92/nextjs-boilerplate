@@ -31,8 +31,6 @@ COPY . .
 #Build the app
 RUN yarn build
 
-RUN ls -la
-
 
 #==================== Running Stage =======================#
 
